@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<WebApplication3.Models.Todo>
+<h1>Todos Index View</h1>
+@if (Model != null)
+{
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Description</th>
+                <th>Datelimit</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+            {
+                var count = 0;
+                <tr>
+                <td>@count</td>
+                <td>@item.Libelle</td>
+                <td>@item.Description</td>
+                <td>@item.Datelimit.ToString("yyyy-MM-dd")</td>
+                <td>@item.State.ToString()</td>
+            </tr>
+				count++;
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>aucune todo found</p>
+}
+
