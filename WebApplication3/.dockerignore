@@ -1,0 +1,70 @@
+# .dockerignore for C# ASP.NET Core project
+# 1. Build outputs (should not be copied into image)
+bin/
+obj/
+
+# 2. User/IDE/Editor settings
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 3. Version control
+.git/
+.gitignore
+.svn/
+.hg/
+
+# 4. Environment and secrets
+.env*
+*.env
+*.pem
+*.key
+*.crt
+
+# 5. Local/temporary files and folders
+tmp/
+temp/
+*.tmp
+.local/
+local/
+
+# 6. Documentation
+*.md
+docs/
+README*
+
+# 7. Docker and Compose files (not needed in image)
+Dockerfile*
+docker-compose*
+
+# 8. Miscellaneous
+*.log
+
+# 9. Node/Frontend (not detected, but for safety)
+node_modules/
+npm-debug.log
+yarn-debug.log
+
+# 10. Python/Go/Java (not detected, but for safety)
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+/vendor/
+*.test
+.go-cache/
+target/
+*.class
+.gradle/
+
+# 11. Test directories (not present, but for safety)
+test/
+tests/
+
+# End of .dockerignore

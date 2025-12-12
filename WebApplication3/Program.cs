@@ -1,3 +1,4 @@
+using WebApplication3.Filters;
 using WebApplication3.Services;
 
 namespace WebApplication3
@@ -12,6 +13,9 @@ namespace WebApplication3
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
             builder.Services.AddScoped<ISessionManagerService, SessionManagerService>();
+            builder.Services.AddScoped<AuthFilter>();
+            builder.Services.AddScoped<ThemeFilter>();
+            builder.Services.AddScoped<LogFilter>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,7 +35,7 @@ namespace WebApplication3
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Todos}/{action=Index}/{id?}")
+                pattern: "{controller=Authentification}/{action=Login}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
