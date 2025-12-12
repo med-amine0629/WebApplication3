@@ -1,0 +1,35 @@
+# syntax=docker/dockerfile:1
+
+# Set the .NET version from the csproj file (update if needed)
+ARG DOTNET_VERSION=7.0
+
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS builder
+WORKDIR /src
+
+# Copy csproj and restore as distinct layers for better caching
+COPY --link WebApplication3.csproj ./
+RUN --mount=type=cache,target=/root/.nuget/packages \
+    --mount=type=cache,target=/root/.cache/msbuild \
+    dotnet restore WebApplication3.csproj
+
+# Copy everything else and build
+COPY --link . .
+RUN dotnet publish WebApplication3.csproj -c Release -o /app/publish
+
+# Final runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:${DOTNET_VERSION} AS final
+WORKDIR /app
+
+# Create non-root user for security
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+USER appuser
+
+# Copy published output from build stage
+COPY --link --from=builder /app/publish .
+
+# Expose default ASP.NET port
+EXPOSE 80
+
+# Start the application
+ENTRYPOINT ["dotnet", "WebApplication3.dll"]

@@ -1,0 +1,2 @@
+﻿abc|123|admin
+abcd|123|user

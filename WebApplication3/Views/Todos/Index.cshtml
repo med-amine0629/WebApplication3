@@ -3,6 +3,8 @@
 *@
 @model List<WebApplication3.Models.Todo>
 <h1>Todos Index View</h1>
+<body class="@ViewData["theme"]">
+  <p>Theme actuel : @ViewData["theme"]</p>
 @if (Model != null)
 {
     <table border="1">
@@ -35,4 +37,4 @@ else
 {
     <p>aucune todos found</p>
 }
-
+</body>

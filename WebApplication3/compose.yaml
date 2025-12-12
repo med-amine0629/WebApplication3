@@ -1,0 +1,19 @@
+services:
+  csharp-webapplication3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: csharp-webapplication3
+    restart: unless-stopped
+    init: true
+    ports:
+      - "80:80"  # Expose ASP.NET default port
+    # env_file: ./.env  # Uncomment if .env file exists
+    # Add external service dependencies under 'depends_on' if needed
+    # No database or cache detected in project files
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    driver: bridge
